@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import events from '../../data/events.json';
+
+export async function getStaticPaths() {
+  return events.map(event => ({
+    params: { id: event.id.toString() }
+  }));
+}
+
+const { id } = Astro.params;
+const event = events.find(e => e.id.toString() === id);
+
+if (!event) {
+  throw Astro.redirect('/404');
+}
+---
+
+<BaseLayout title={event.name}>
+	<h1>${event.name} Event Details Page</h1>
+    <h2>Event ID: {id}</h2>
+</BaseLayout>

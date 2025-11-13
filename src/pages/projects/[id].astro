@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import projects from '../../data/projects.json';
+
+export async function getStaticPaths() {
+  return projects.map(project => ({
+    params: { id: project.id.toString() }
+  }));
+}
+
+const { id } = Astro.params;
+const project = projects.find(p => p.id.toString() === id);
+
+if (!project) {
+  throw Astro.redirect('/404');
+}
+---
+
+<BaseLayout title={project.name}>
+	<h1>{project.name} Project Details Page</h1>
+    <h2>Project ID: {id}</h2>
+</BaseLayout>
