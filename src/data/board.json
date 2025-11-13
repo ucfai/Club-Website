@@ -1,0 +1,13 @@
+[
+  {
+    "name": "Gaurav Kanoujia",
+    "position": "President",
+    "photo": "gaurav.jpg",
+    "links": [
+      {
+        "type": "linkedin",
+        "url": "https://www.linkedin.com/feed/"
+      }
+    ]
+  }
+]

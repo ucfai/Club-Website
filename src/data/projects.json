@@ -1,0 +1,15 @@
+[
+  {
+    "id": 1,
+    "name": "Dev Team",
+    "description": "The development team is responsible for building and maintaining the AI@UCF website and other digital platforms. They work on front-end and back-end development, ensuring a seamless user experience.",
+    "skills": ["HTML", "CSS", "JavaScript", "Astro", "React", "Node.js"],
+    "lead": "Gaurav Gaurav",
+    "links": [
+      {
+        "type": "github",
+        "url": "https://github.com/ucfai/Club-Website"
+      }
+    ]
+  }
+]

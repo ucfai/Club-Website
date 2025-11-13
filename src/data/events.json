@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "name": "Intro to AI Workshop",
+    "date": "2024-07-15",
+    "time": "10:00 AM - 12:00 PM",
+    "location": "UCF Main Campus, Room 101",
+    "description": "A beginner-friendly workshop introducing the basics of Artificial Intelligence.",
+    "image": "https://i.ibb.co/V0FZzpr5/Core-2-Poster.png",
+    "links": [
+      {
+        "type": "slides",
+        "url": "https://docs.google.com/presentation/d/1lWWWydeQa4oc56CLfrtv4G3BO5GLr0dsAm-5ymSNUuQ/edit?usp=drive_link"
+      }
+    ]
+  }
+]
