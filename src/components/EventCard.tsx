@@ -66,35 +66,40 @@ export default function CountdownCard({ event }: { event: Event }) {
   return (
     <div
       className="
-        flex flex-col items-center
-        w-full max-w-2xl
-        bg-white/4 
-        rounded-2xl
-        p-8 sm:p-10
+        flex w-full flex-col items-center justify-center
+        max-w-4xl
+        md:min-h-[50vh]
+        md:max-h-[640px]
+        rounded-3xl
+        border border-white/10
+        bg-white/[0.07]
+        backdrop-blur-sm
+        p-8 sm:p-11 md:p-14
         text-white
-        gap-6
-        mx-auto mt-10 mb-10
+        font-['Montserrat']
+        gap-5 md:gap-6
+        mx-auto
       "
     >
-      <h2 className="text-center text-2xl sm:text-3xl font-bold">
+      <h2 className="text-center text-3xl sm:text-4xl md:text-[2.8rem] font-extrabold uppercase tracking-wide whitespace-normal break-words font-['Bungee'] leading-tight">
         {event.name}
       </h2>
 
-      <p className="text-sm sm:text-base text-center opacity-90 px-2">
-        {event.description}
+      <p className="text-lg sm:text-2xl md:text-[1.7rem] text-center text-white/80 whitespace-normal break-words font-semibold">
+        {event.location}
       </p>
 
-      <p className="text-sm sm:text-base text-center opacity-80">
-        {event.location}
+      <p className="text-center text-base sm:text-lg text-white/70 max-w-2xl whitespace-normal break-words leading-relaxed">
+        {event.description}
       </p>
 
       <div
         className="
-          bg-white/10 backdrop-blur-md
-          rounded-xl
-          px-6 py-4
-          flex gap-8 sm:gap-12
-          mt-4
+          mt-5 md:mt-7 flex overflow-hidden
+          rounded-2xl border border-white/10
+          bg-white/15
+          backdrop-blur-sm
+          divide-x divide-white/15
         "
       >
         {[
@@ -103,11 +108,11 @@ export default function CountdownCard({ event }: { event: Event }) {
           { label: "Minutes", value: timeLeft.mins },
           { label: "Seconds", value: timeLeft.secs },
         ].map((unit) => (
-          <div key={unit.label} className="flex flex-col items-center">
-            <span className="text-3xl sm:text-4xl md:text-5xl font-bold">
+          <div key={unit.label} className="flex min-w-[82px] sm:min-w-[108px] md:min-w-[118px] flex-col items-center px-4 py-3 sm:px-6 sm:py-4 md:px-7 md:py-5">
+            <span className="text-4xl sm:text-5xl md:text-[3.4rem] font-extrabold leading-none font-['Bungee']">
               {String(unit.value).padStart(2, "0")}
             </span>
-            <span className="text-xs sm:text-sm opacity-80 mt-1">
+            <span className="mt-2 text-xs sm:text-sm uppercase tracking-wide text-white/75 font-['Bungee']">
               {unit.label}
             </span>
           </div>
