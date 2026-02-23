@@ -1,5 +1,7 @@
 ---
-const {title, description, link, github_link} = Astro.props;
+import {Icon} from 'astro-icon/components'
+
+const {title, description, project_link, github_link} = Astro.props;
 ---
 
 <div class="flex justify-center w-[500px] border-1 border-white rounded-3xl backdrop-blur-md bg-[rgba(128,128,128,0.2)]">
@@ -13,12 +15,12 @@ const {title, description, link, github_link} = Astro.props;
         </p>
 
         <div class="flex flex-row gap-x-8 mx-auto mb-8">
-            <a href={link} target="_blank">
-                <img src="../../public/link-icon.png" class="w-12 rounded-4xl object-none">
+            <a href={project_link} target="_blank">
+                <Icon name="link-icon" class="text-4xl" />
             </a>
 
             <a href={github_link} target="_blank">
-                <img src="../../public/github-icon.png" class="w-12">
+                <Icon name="github-icon"  class="text-4xl"/>
             </a>
         </div>
     </div>
