@@ -14,12 +14,15 @@ const { title = "AI@UCF" } = Astro.props;
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" href="/favicon.png"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
   </head>
   <body class = "relative bg-black text-white overflow-w-hidden">
     <ParticlesBackground />
 
     <div class = "relative z-10">
-      <!-- <Navbar /> -->
+      <Navbar />
 
       <slot />
 
