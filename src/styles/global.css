@@ -1,1 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Bungee&family=Inria+Sans:wght@400;600;700&family=Montserrat:ital,wght@0,400;0,600;0,700;1,400&display=swap");
 @import "tailwindcss";
+
+.font-bungee {
+	font-family: "Bungee", sans-serif;
+}
+
+.font-montserrat {
+	font-family: "Montserrat", sans-serif;
+}
+
+.font-inria {
+	font-family: "Inria Sans", sans-serif;
+}
