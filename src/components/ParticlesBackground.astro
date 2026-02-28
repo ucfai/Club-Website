@@ -1,0 +1,64 @@
+---
+---
+
+<div class="particles-wrapper fixed inset-0 -z-10">
+  <div id="tsparticles" class="absolute inset-0"></div>
+  <!-- <div class="absolute inset-0 backdrop-blur-[2px]"></div> -->
+</div>
+
+<script>
+    import { tsParticles } from "@tsparticles/engine";
+    import type { Container } from "@tsparticles/engine";
+    import { loadSlim } from "@tsparticles/slim";
+    import config from "../styles/particles-config";
+
+    let particleContainer: Container | undefined;
+    let blockedHoverCount = 0;
+
+    const setParticlesInteractivity = (isInteractive: boolean) => {
+        if (!particleContainer) return;
+
+        particleContainer.options.interactivity.events.onHover.enable = isInteractive;
+        particleContainer.actualOptions.interactivity.events.onHover.enable = isInteractive;
+        particleContainer.options.interactivity.events.onClick.enable = isInteractive;
+        particleContainer.actualOptions.interactivity.events.onClick.enable = isInteractive;
+    };
+
+    const disableHover = () => {
+        blockedHoverCount += 1;
+        setParticlesInteractivity(false);
+    };
+
+    const enableHover = () => {
+        blockedHoverCount = Math.max(0, blockedHoverCount - 1);
+
+        if (blockedHoverCount === 0) {
+            setParticlesInteractivity(true);
+        }
+    };
+
+    const bindNoParticlesZones = () => {
+        const zones = document.querySelectorAll<HTMLElement>(".no-particles");
+
+        zones.forEach((zone) => {
+            if (zone.dataset.particlesBound === "true") return;
+
+            zone.addEventListener("mouseenter", disableHover);
+            zone.addEventListener("mouseleave", enableHover);
+            zone.dataset.particlesBound = "true";
+        });
+    };
+
+    
+    window.addEventListener("DOMContentLoaded", async () => {
+        await loadSlim(tsParticles);
+        particleContainer = await tsParticles.load({id: "tsparticles", options: config});
+
+        const observer = new MutationObserver(() => bindNoParticlesZones());
+        observer.observe(document.body, { childList: true, subtree: true });
+
+        bindNoParticlesZones();
+    });
+
+    
+</script>
