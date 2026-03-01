@@ -1,0 +1,46 @@
+---
+import { Icon } from "astro-icon/components";
+
+const currentPath = Astro.url.pathname;
+
+let currentPage;
+
+if (currentPath === "/events") {
+  currentPage = "Events";
+} else if (currentPath === "/projects") {
+  currentPage = "Projects";
+} else if (currentPath === "/about") {
+  currentPage = "About";
+} else {
+  currentPage = "Home";
+}
+---
+
+<nav
+  class={`relative py-5 px-7 flex 0_5xl:hidden gap-4 justify-end ${currentPage !== "Home" && "xs:justify-between"} bg-linear-to-b from-black from-0% via-black via-65% to-transparent to-100%`}
+>
+  {
+    currentPage !== "Home" && (
+      <div class="no-particles hidden xs:flex items-center gap-3.5">
+        <a href="/">
+          <img
+            src="/favicon.svg"
+            alt="AI@UCF Logo"
+            class="w-10 h-10 inline-block"
+          />
+        </a>
+        <h1 class="text-[26px] font-bungee tracking-wider">
+            <span class="text-white">AI</span><!--
+        --><span class="text-[#F8D03F]">@UCF</span>
+        </h1>
+      </div>
+    )
+  }
+  <button class="cursor-pointer">
+    <div
+      class="no-particles p-1.5 w-10 h-10 flex justify-center items-center bg-white rounded-2xl"
+    >
+      <Icon name="fa7-solid:bars" class="w-6.5 h-6.5 text-black my-auto" />
+    </div>
+  </button>
+</nav>
