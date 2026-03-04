@@ -149,3 +149,11 @@ vite.config.ts.timestamp-*
 
 # jetbrains setting folder
 .idea/
+
+# python
+venv/
+__pycache__/
+*.pyc
+
+# env
+.env
