@@ -78,22 +78,22 @@ export default function CountdownCard({ event }: { event: Event }) {
       "
     >
       {/* Content Section */}
-      <div className="flex flex-col items-center text-center w-full gap-3 sm:gap-4 lg:gap-4 pt-1 sm:pt-2 lg:pt-6">
-        <h2 className="font-bungee text-4xl sm:text-4xl lg:text-5xl uppercase tracking-wide break-words">
+      <div className="flex flex-col items-center text-center w-full gap-3 sm:gap-4 lg:gap-4 pt-3 sm:pt-10 lg:pt-15">
+        <h2 className="font-bungee text-3xl sm:text-3xl lg:text-4xl uppercase tracking-wide break-words">
           {event.name}
         </h2>
 
-        <p className="font-montserrat text-3xl sm:text-3xl lg:text-4xl opacity-90">
+        <p className="font-montserrat text-2xl sm:text-2xl lg:text-3xl pt-5 opacity-90">
           {event.time}
         </p>
 
-        <p className="font-montserrat text-xl sm:text-2xl lg:text-3xl italic opacity-90">
+        <p className="font-montserrat text-lg sm:text-xl lg:text-2xl italic opacity-90">
           {event.location}
         </p>
       </div>
 
       {/* Countdown Section */}
-      <div className="w-[92%] sm:w-[88%] lg:w-[84%] max-w-4xl overflow-hidden rounded-2xl sm:rounded-3xl border border-white/20 bg-white/[0.20]">
+      <div className="w-[92%] sm:w-[88%] lg:w-[84%] max-w-4xl lg:max-w-[40vw] overflow-hidden rounded-2xl sm:rounded-3xl border border-white/20 bg-white/[0.20]">
         <div className="grid grid-cols-3 divide-x divide-white/20">
           {[
             { label: "Days", value: timeLeft.days },
@@ -101,10 +101,10 @@ export default function CountdownCard({ event }: { event: Event }) {
             { label: "Minutes", value: timeLeft.mins },
           ].map((unit) => (
             <div key={unit.label} className="flex flex-col items-center justify-center py-4 sm:py-6 lg:py-7">
-              <span className="font-bungee text-3xl sm:text-4xl lg:text-5xl leading-none">
+              <span className="font-bungee text-2xl sm:text-3xl lg:text-4xl leading-none">
                 {String(unit.value).padStart(2, "0")}
               </span>
-              <span className="font-inria mt-1 sm:mt-2 lg:mt-2 text-sm sm:text-lg lg:text-2xl opacity-85 tracking-wide">
+              <span className="font-inria mt-1 sm:mt-2 lg:mt-2 text-xs sm:text-base lg:text-xl opacity-85 tracking-wide">
                 {unit.label}
               </span>
             </div>
@@ -116,7 +116,7 @@ export default function CountdownCard({ event }: { event: Event }) {
         href={event.links[0]?.url ?? "#"}
         target={event.links[0]?.url ? "_blank" : undefined}
         rel={event.links[0]?.url ? "noreferrer" : undefined}
-        className="font-montserrat pb-1 inline-flex items-center gap-2 text-base sm:text-lg opacity-90 transition hover:opacity-100"
+        className="font-montserrat pb-1 inline-flex translate-y-3 items-center gap-2 text-base sm:text-lg opacity-90 transition hover:opacity-100"
       >
         <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
