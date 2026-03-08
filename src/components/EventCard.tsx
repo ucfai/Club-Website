@@ -66,9 +66,9 @@ export default function CountdownCard({ event }: { event: Event }) {
   return (
     <div
       className="
-        flex flex-col items-center justify-center
+        flex flex-col items-center justify-between
         w-full max-w-5xl
-        min-h-[360px] sm:min-h-[460px] lg:min-h-[580px]
+        min-h-[380px] sm:min-h-[500px] lg:min-h-[620px]
         bg-white/[0.15]
         rounded-2xl sm:rounded-[28px]
         px-4 py-8 sm:px-8 sm:py-10 lg:px-12 lg:py-12
@@ -78,24 +78,27 @@ export default function CountdownCard({ event }: { event: Event }) {
       "
     >
       {/* Content Section */}
-      <div className="flex flex-col items-center text-center w-full gap-4 sm:gap-4 lg:gap-4">
+      <div className="flex flex-col items-center text-center w-full gap-3 sm:gap-4 lg:gap-4 pt-1 sm:pt-2 lg:pt-6">
         <h2 className="font-bungee text-4xl sm:text-4xl lg:text-5xl uppercase tracking-wide break-words">
           {event.name}
         </h2>
 
         <p className="font-montserrat text-3xl sm:text-3xl lg:text-4xl opacity-90">
+          {event.time}
+        </p>
+
+        <p className="font-montserrat text-xl sm:text-2xl lg:text-3xl italic opacity-90">
           {event.location}
         </p>
       </div>
 
       {/* Countdown Section */}
-      <div className="mt-8 sm:mt-10 lg:mt-14 w-full max-w-3xl overflow-hidden rounded-2xl sm:rounded-3xl border border-white/20 bg-white/[0.20]">
-        <div className="grid grid-cols-4 divide-x divide-white/20">
+      <div className="w-[92%] sm:w-[88%] lg:w-[84%] max-w-4xl overflow-hidden rounded-2xl sm:rounded-3xl border border-white/20 bg-white/[0.20]">
+        <div className="grid grid-cols-3 divide-x divide-white/20">
           {[
             { label: "Days", value: timeLeft.days },
             { label: "Hours", value: timeLeft.hours },
             { label: "Minutes", value: timeLeft.mins },
-            { label: "Seconds", value: timeLeft.secs },
           ].map((unit) => (
             <div key={unit.label} className="flex flex-col items-center justify-center py-4 sm:py-6 lg:py-7">
               <span className="font-bungee text-3xl sm:text-4xl lg:text-5xl leading-none">
@@ -108,6 +111,18 @@ export default function CountdownCard({ event }: { event: Event }) {
           ))}
         </div>
       </div>
+
+      <a
+        href={event.links[0]?.url ?? "#"}
+        target={event.links[0]?.url ? "_blank" : undefined}
+        rel={event.links[0]?.url ? "noreferrer" : undefined}
+        className="font-montserrat pb-1 inline-flex items-center gap-2 text-base sm:text-lg opacity-90 transition hover:opacity-100"
+      >
+        <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+        </svg>
+        More Information
+      </a>
     </div>
   );
 }
