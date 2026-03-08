@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Icon } from "@iconify/react";
 
 type TimeLeft = {
   days: number;
@@ -118,9 +119,7 @@ export default function CountdownCard({ event }: { event: Event }) {
         rel={event.links[0]?.url ? "noreferrer" : undefined}
         className="font-montserrat pb-1 inline-flex translate-y-3 items-center gap-2 text-base sm:text-lg opacity-90 transition hover:opacity-100"
       >
-        <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-        </svg>
+        <Icon icon="heroicons-outline:external-link" className="h-5 w-5" aria-hidden="true" />
         More Information
       </a>
     </div>
