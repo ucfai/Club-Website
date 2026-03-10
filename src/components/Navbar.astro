@@ -21,15 +21,15 @@ if (currentPath === "/events") {
 >
   {
     currentPage !== "Home" && (
-      <div class="no-particles flex items-center gap-3.5">
-        <a href="/">
+      <div class="flex items-center gap-3.5">
+        <a href="/" class="no-particles">
           <img
             src="/favicon.svg"
             alt="AI@UCF Logo"
-            class="w-10 h-10 inline-block"
+            class="w-10 h-10 inline-block hover:opacity-80 transition-opacity duration-200"
           />
         </a>
-        <h1 class="text-[26px] font-bungee tracking-wider">
+        <h1 class="no-particles text-[26px] font-bungee tracking-wider">
           <>
             <span class="text-white">AI</span><!--
         --><span class="text-[#F8D03F]">@UCF</span>
@@ -43,16 +43,16 @@ if (currentPath === "/events") {
   >
     <a
       href="/about"
-      class={currentPage === "About" ? "text-[#F8D03F]" : "text-white"}>About</a
+      class={currentPage === "About" ? "text-[#F8D03F] hover:text-yellow-300" : "text-white hover:text-gray-300"}>About</a
     >
     <a
       href="/events"
-      class={currentPage === "Events" ? "text-[#F8D03F]" : "text-white"}
+      class={currentPage === "Events" ? "text-[#F8D03F] hover:text-yellow-300" : "text-white hover:text-gray-300"}
       >Events</a
     >
     <a
       href="/projects"
-      class={currentPage === "Projects" ? "text-[#F8D03F]" : "text-white"}
+      class={currentPage === "Projects" ? "text-[#F8D03F] hover:text-yellow-300" : "text-white hover:text-gray-300"}
       >Projects</a
     >
   </div>
@@ -60,11 +60,8 @@ if (currentPath === "/events") {
     href="https://ucfai.org/linktree"
     target="_blank"
     rel="noopener noreferrer"
+    class="no-particles p-1.5 w-10 h-10 flex justify-center items-center bg-white hover:bg-gray-300 rounded-2xl"
   >
-    <div
-      class="no-particles p-1.5 w-10 h-10 flex justify-center items-center bg-white rounded-2xl"
-    >
       <Icon name="fa7-brands:linktree" class="w-6.5 h-6.5 text-black my-auto" />
-    </div>
   </a>
 </nav>

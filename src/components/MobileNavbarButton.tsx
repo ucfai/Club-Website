@@ -19,7 +19,7 @@ const MobileNavbarButton = ({ currentPage }: { currentPage: string }) => {
   return (
     <>
       <button
-        className="cursor-pointer no-particles p-1.5 w-10 h-10 flex justify-center items-center bg-white rounded-2xl"
+        className="no-particles cursor-pointer p-1.5 w-10 h-10 flex justify-center items-center bg-white hover:bg-gray-300 transition rounded-2xl"
         onClick={openSidenav}
       >
         <FaBars className="w-4.5 h-4.5 text-black my-auto" />
@@ -34,11 +34,11 @@ const MobileNavbarButton = ({ currentPage }: { currentPage: string }) => {
 
           <div className="no-particles 0_5xl:hidden fixed flex flex-col justify-center items-center gap-10 px-7 py-10 top-0 right-0 z-50 max-w-80 w-3/4 h-dvh overflow-auto p-4 bg-[#0f0f0f] shadow-[0_2px_10px_#FFFFFF] font-inria-sans text-xl font-semibold tracking-wide">
             <button
-              className="no-particles fixed top-6.5 right-6.5 cursor-pointer"
+              className="no-particles fixed top-6.5 right-6.5 cursor-pointer transition"
               aria-label="Close Button"
               onClick={closeSidenav}
             >
-              <FaTimes className="w-7 h-7 text-white my-auto" />
+              <FaTimes className="w-7 h-7 text-white hover:text-gray-300 my-auto" />
             </button>
 
             <a
@@ -50,7 +50,9 @@ const MobileNavbarButton = ({ currentPage }: { currentPage: string }) => {
                 }
               }}
               className={
-                currentPage === "Home" ? "text-[#F8D03F]" : "text-white"
+                currentPage === "Home"
+                  ? "text-[#F8D03F] hover:text-yellow-300"
+                  : "text-white hover:text-gray-300"
               }
             >
               Home
@@ -64,7 +66,9 @@ const MobileNavbarButton = ({ currentPage }: { currentPage: string }) => {
                 }
               }}
               className={
-                currentPage === "About" ? "text-[#F8D03F]" : "text-white"
+                currentPage === "About"
+                  ? "text-[#F8D03F] hover:text-yellow-300"
+                  : "text-white hover:text-gray-300"
               }
             >
               About
@@ -78,7 +82,9 @@ const MobileNavbarButton = ({ currentPage }: { currentPage: string }) => {
                 }
               }}
               className={
-                currentPage === "Events" ? "text-[#F8D03F]" : "text-white"
+                currentPage === "Events"
+                  ? "text-[#F8D03F] hover:text-yellow-300"
+                  : "text-white hover:text-gray-300"
               }
             >
               Events
@@ -92,7 +98,9 @@ const MobileNavbarButton = ({ currentPage }: { currentPage: string }) => {
                 }
               }}
               className={
-                currentPage === "Projects" ? "text-[#F8D03F]" : "text-white"
+                currentPage === "Projects"
+                  ? "text-[#F8D03F] hover:text-yellow-300"
+                  : "text-white hover:text-gray-300"
               }
             >
               Projects
