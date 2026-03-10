@@ -1,4 +1,5 @@
 ---
+
 ---
 
 <div class="particles-wrapper fixed inset-0 -z-10">
@@ -7,58 +8,69 @@
 </div>
 
 <script>
-    import { tsParticles } from "@tsparticles/engine";
-    import type { Container } from "@tsparticles/engine";
-    import { loadSlim } from "@tsparticles/slim";
-    import config from "../styles/particles-config";
+  import { tsParticles } from "@tsparticles/engine";
+  import type { Container } from "@tsparticles/engine";
+  import { loadSlim } from "@tsparticles/slim";
+  import config from "../styles/particles-config";
 
-    let particleContainer: Container | undefined;
-    let blockedHoverCount = 0;
+  let particleContainer: Container | undefined;
+  let blockedHoverCount = 0;
 
-    const setParticlesInteractivity = (isInteractive: boolean) => {
-        if (!particleContainer) return;
+  const boundZones = new WeakSet<HTMLElement>();
 
-        particleContainer.options.interactivity.events.onHover.enable = isInteractive;
-        particleContainer.actualOptions.interactivity.events.onHover.enable = isInteractive;
-        particleContainer.options.interactivity.events.onClick.enable = isInteractive;
-        particleContainer.actualOptions.interactivity.events.onClick.enable = isInteractive;
-    };
+  const setParticlesInteractivity = (isInteractive: boolean) => {
+    if (!particleContainer) return;
 
-    const disableHover = () => {
-        blockedHoverCount += 1;
-        setParticlesInteractivity(false);
-    };
+    particleContainer.options.interactivity.events.onHover.enable =
+      isInteractive;
+    particleContainer.actualOptions.interactivity.events.onHover.enable =
+      isInteractive;
+    particleContainer.options.interactivity.events.onClick.enable =
+      isInteractive;
+    particleContainer.actualOptions.interactivity.events.onClick.enable =
+      isInteractive;
+  };
 
-    const enableHover = () => {
-        blockedHoverCount = Math.max(0, blockedHoverCount - 1);
+  const disableHover = () => {
+    blockedHoverCount += 1;
+    setParticlesInteractivity(false);
+  };
 
-        if (blockedHoverCount === 0) {
-            setParticlesInteractivity(true);
-        }
-    };
+  const enableHover = () => {
+    blockedHoverCount = Math.max(0, blockedHoverCount - 1);
 
-    const bindNoParticlesZones = () => {
-        const zones = document.querySelectorAll<HTMLElement>(".no-particles");
+    if (blockedHoverCount === 0) {
+      setParticlesInteractivity(true);
+    }
+  };
 
-        zones.forEach((zone) => {
-            if (zone.dataset.particlesBound === "true") return;
+  (window as any).resumeParticles = () => {
+    blockedHoverCount = 0;
+    setParticlesInteractivity(true);
+  };
 
-            zone.addEventListener("mouseenter", disableHover);
-            zone.addEventListener("mouseleave", enableHover);
-            zone.dataset.particlesBound = "true";
-        });
-    };
+  const bindNoParticlesZones = () => {
+    const zones = document.querySelectorAll<HTMLElement>(".no-particles");
 
-    
-    window.addEventListener("DOMContentLoaded", async () => {
-        await loadSlim(tsParticles);
-        particleContainer = await tsParticles.load({id: "tsparticles", options: config});
+    zones.forEach((zone) => {
+      if (boundZones.has(zone)) return;
 
-        const observer = new MutationObserver(() => bindNoParticlesZones());
-        observer.observe(document.body, { childList: true, subtree: true });
+      zone.addEventListener("mouseenter", disableHover);
+      zone.addEventListener("mouseleave", enableHover);
+      boundZones.add(zone);
+    });
+  };
 
-        bindNoParticlesZones();
+  window.addEventListener("DOMContentLoaded", async () => {
+    await loadSlim(tsParticles);
+    particleContainer = await tsParticles.load({
+      id: "tsparticles",
+      options: config,
     });
 
-    
+    const observer = new MutationObserver(() => bindNoParticlesZones());
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    bindNoParticlesZones();
+  });
 </script>
