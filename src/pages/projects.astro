@@ -3,7 +3,46 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Project_Card from "../components/Project-Card.astro";
 ---
 
-<BaseLayout title="Projects">
+<BaseLayout title="Projects">npm
 	<h1>AI@UCF Projects Page</h1>
+	<div class="mx-[15%]">
+		<div class="grid grid-cols-3 max-2xl:grid-cols-2  max-md:grid-cols-1 gap-4  items-start bg-black">
+			<div class="grid gap-4">
+				<Project_Card
+				title="Project Smash"
+				description="Learn the fundamentals of AI, explore real-world applications, and see how you can get started in the field.">
+				</Project_Card>
+		
+				<Project_Card 
+				title="Project Smash"
+				description="Learn the fundamentals of AI, explore real-world applications">
+				</Project_Card>
+			</div>
+
+			<div class="grid gap-4">
+				<Project_Card 
+				title="Project Smash"
+				description="">
+				</Project_Card>
+		
+				<Project_Card 
+				title="Project Smash"
+				description="">
+				</Project_Card>
+			</div>
+
+			<div class="grid gap-4">
+				<Project_Card 
+				title="Project Smash"
+				description="Learn the fundamentals of AI, explore real-world applications">
+				</Project_Card>
+		
+				<Project_Card 
+				title="Project Smash"
+				description="Learn the fundamentals of AI, explore real-world applications, and see how you can get started in the field.">
+				</Project_Card>
+			</div>
+		</div>
+	</div>
 </BaseLayout>
 
