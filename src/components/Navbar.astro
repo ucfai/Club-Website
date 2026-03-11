@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import MobileNavbarButton from "./MobileNavbarButton.tsx";
 
 const currentPath = Astro.url.pathname;
 
@@ -17,11 +18,11 @@ if (currentPath === "/events") {
 ---
 
 <nav
-  class={`relative py-5 pl-7 pr-5 hidden 0_5xl:flex gap-4 ${currentPage === "Home" ? "justify-end" : "justify-between"} bg-linear-to-b from-black from-0% via-black via-65% to-transparent to-100%`}
+  class={`relative py-5 pl-7 pr-5 flex gap-4 justify-end ${currentPage !== "Home" && "xs:justify-between"} bg-linear-to-b from-black from-0% via-black via-65% to-transparent to-100%`}
 >
   {
     currentPage !== "Home" && (
-      <div class="flex items-center gap-3.5">
+      <div class="hidden xs:flex items-center gap-3.5">
         <a href="/" class="no-particles">
           <img
             src="/favicon.svg"
@@ -39,7 +40,7 @@ if (currentPath === "/events") {
     )
   }
   <div
-    class="py-2 px-13 absolute left-1/2 transform -translate-x-1/2 no-particles flex items-center justify-center rounded-3xl gap-10 bg-[rgba(255,255,255,0.15)] border-[rgba(255,255,255,0.2)] border-[0.5px] font-inria-sans"
+    class="py-2 px-13 absolute left-1/2 transform -translate-x-1/2 no-particles hidden 0_5xl:flex items-center justify-center rounded-3xl gap-10 bg-[rgba(255,255,255,0.15)] border-[rgba(255,255,255,0.2)] border-[0.5px] font-inria-sans"
   >
     <a
       href="/about"
@@ -61,8 +62,9 @@ if (currentPath === "/events") {
     target="_blank"
     aria-label="AI@UCF Linktree"
     rel="noopener noreferrer"
-    class="no-particles p-1.5 w-10 h-10 flex justify-center items-center bg-white hover:bg-gray-300 rounded-2xl"
+    class="no-particles p-1.5 w-10 h-10 hidden 0_5xl:flex justify-center items-center bg-white hover:bg-gray-300 rounded-2xl"
   >
       <Icon name="fa7-brands:linktree" class="w-6.5 h-6.5 text-black my-auto" />
   </a>
+  <MobileNavbarButton currentPage={currentPage} client:idle />
 </nav>

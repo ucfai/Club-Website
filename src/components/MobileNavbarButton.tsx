@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 
 const MobileNavbarButton = ({ currentPage }: { currentPage: string }) => {
@@ -16,10 +16,23 @@ const MobileNavbarButton = ({ currentPage }: { currentPage: string }) => {
     }
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 896 && sidenavOpen) {
+        closeSidenav();
+      }
+    };
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [sidenavOpen]);
+
   return (
     <>
       <button
-        className="no-particles cursor-pointer p-1.5 w-10 h-10 flex justify-center items-center bg-white hover:bg-gray-300 transition rounded-2xl"
+        className="no-particles cursor-pointer p-1.5 w-10 h-10 flex 0_5xl:hidden justify-center items-center bg-white hover:bg-gray-300 transition rounded-2xl"
         onClick={openSidenav}
       >
         <FaBars className="w-4.5 h-4.5 text-black my-auto" />

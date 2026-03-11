@@ -1,7 +1,6 @@
 ---
 import "../styles/global.css";
 import Navbar from "../components/Navbar.astro";
-import MobileNavbar from "../components/MobileNavbar.astro";
 import Footer from "../components/Footer.astro";
 import ParticlesBackground from "../components/ParticlesBackground.astro";
 const { title = "AI@UCF" } = Astro.props;
@@ -31,7 +30,6 @@ const { title = "AI@UCF" } = Astro.props;
 
     <div class="relative z-10">
       <Navbar />
-      <MobileNavbar />
 
       <slot />
 
