@@ -14,9 +14,7 @@
   import config from "../styles/particles-config";
 
   let particleContainer: Container | undefined;
-  let blockedHoverCount = 0;
-
-  const boundZones = new WeakSet<HTMLElement>();
+  let particlesPaused = false;
 
   const setParticlesInteractivity = (isInteractive: boolean) => {
     if (!particleContainer) return;
@@ -31,35 +29,19 @@
       isInteractive;
   };
 
-  const disableHover = () => {
-    blockedHoverCount += 1;
+  const pauseParticles = () => {
+    if (particlesPaused) return;
+    particlesPaused = true;
     setParticlesInteractivity(false);
   };
 
-  const enableHover = () => {
-    blockedHoverCount = Math.max(0, blockedHoverCount - 1);
-
-    if (blockedHoverCount === 0) {
-      setParticlesInteractivity(true);
-    }
-  };
-
-  (window as any).resumeParticles = () => {
-    blockedHoverCount = 0;
+  const resumeParticles = () => {
+    if (!particlesPaused) return;
+    particlesPaused = false;
     setParticlesInteractivity(true);
   };
 
-  const bindNoParticlesZones = () => {
-    const zones = document.querySelectorAll<HTMLElement>(".no-particles");
-
-    zones.forEach((zone) => {
-      if (boundZones.has(zone)) return;
-
-      zone.addEventListener("mouseenter", disableHover);
-      zone.addEventListener("mouseleave", enableHover);
-      boundZones.add(zone);
-    });
-  };
+  (window as any).resumeParticles = resumeParticles;
 
   window.addEventListener("DOMContentLoaded", async () => {
     await loadSlim(tsParticles);
@@ -68,9 +50,26 @@
       options: config,
     });
 
-    const observer = new MutationObserver(() => bindNoParticlesZones());
-    observer.observe(document.body, { childList: true, subtree: true });
+    document.addEventListener("mouseover", (e) => {
+      const target = e.target as HTMLElement;
 
-    bindNoParticlesZones();
+      if (target.closest(".no-particles")) {
+        pauseParticles();
+      }
+    });
+
+    document.addEventListener("mouseout", (e) => {
+      const target = e.target as HTMLElement;
+
+      if (!target.closest(".no-particles")) return;
+
+      const next = (e.relatedTarget as HTMLElement | null)?.closest?.(
+        ".no-particles",
+      );
+
+      if (!next) {
+        resumeParticles();
+      }
+    });
   });
 </script>
