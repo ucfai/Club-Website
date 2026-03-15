@@ -1,1 +1,27 @@
 @import "tailwindcss";
+
+@theme {
+  --font-bungee: "Bungee", sans-serif;
+  --font-inria-sans: "Inria Sans", sans-serif;
+  --breakpoint-0_5xl: 56rem;
+  --breakpoint-xs: 28rem;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #f8d03f;
+  border-radius: 9999px;
+}
+
+/* Firefox support */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #f8d03f #000000;
+}

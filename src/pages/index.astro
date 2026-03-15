@@ -1,7 +1,23 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ScrollIndicator from "../components/ScrollIndicator.tsx";
 ---
 
 <BaseLayout title="Home">
-	<h1>AI@UCF Club Website</h1>
+  <section
+    class="min-h-[calc(100dvh-80px)] pb-20 flex flex-col items-center justify-center gap-6.5"
+  >
+    <img
+      src="/favicon.svg"
+      alt="AI@UCF Logo"
+      class="no-particles max-w-2/3 w-40 aspect-square inline-block"
+    />
+    <h1
+      class="no-particles text-[clamp(40px,7vw,60px)] font-bungee tracking-widest"
+    >
+      <span class="text-white">AI</span><span class="text-[#F8D03F]">@UCF</span>
+    </h1>
+
+    <ScrollIndicator client:idle />
+  </section>
 </BaseLayout>
