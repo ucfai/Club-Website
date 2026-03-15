@@ -5,7 +5,6 @@ type TimeLeft = {
   days: number;
   hours: number;
   mins: number;
-  secs: number;
 };
 
 type Event = {
@@ -18,6 +17,16 @@ type Event = {
   image: string;
   links: { type: string; url: string }[];
 };
+
+function formatEventDate(dateStr: string) {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+  });
+}
+
 
 function parseEventDate(dateStr: string, timeStr: string): Date {
   const startTime = timeStr.split(" - ")[0];
@@ -38,7 +47,6 @@ export default function CountdownCard({ event }: { event: Event }) {
     days: 0,
     hours: 0,
     mins: 0,
-    secs: 0,
   });
 
   useEffect(() => {
@@ -47,21 +55,30 @@ export default function CountdownCard({ event }: { event: Event }) {
       const diff = target.getTime() - now.getTime();
 
       if (diff <= 0) {
-        setTimeLeft({ days: 0, hours: 0, mins: 0, secs: 0 });
+        setTimeLeft({ days: 0, hours: 0, mins: 0 });
         return;
       }
 
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
       const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
       const mins = Math.floor((diff / (1000 * 60)) % 60);
-      const secs = Math.floor((diff / 1000) % 60);
 
-      setTimeLeft({ days, hours, mins, secs });
+      setTimeLeft({ days, hours, mins });
     };
 
+
     updateCountdown();
-    const timer = setInterval(updateCountdown, 1000);
-    return () => clearInterval(timer);
+
+    // Update every minute instead of every second
+    const msUntilNextMinute = 60000 - (Date.now() % 60000);
+
+    const timeout = setTimeout(() => {
+      updateCountdown();
+      const interval = setInterval(updateCountdown, 60000);
+      return () => clearInterval(interval);
+    }, msUntilNextMinute);
+    
+    return () => clearTimeout(timeout);
   }, [target]);
 
   return (
@@ -80,12 +97,12 @@ export default function CountdownCard({ event }: { event: Event }) {
     >
       {/* Content Section */}
       <div className="flex flex-col items-center text-center w-full gap-3 sm:gap-4 lg:gap-4 pt-3 sm:pt-10 lg:pt-15">
-        <h2 className="font-bungee text-3xl sm:text-3xl lg:text-4xl uppercase tracking-wide break-words">
+        <h2 className="font-bungee text-2xl sm:text-3xl lg:text-4xl uppercase tracking-wide break-words">
           {event.name}
         </h2>
 
-        <p className="font-montserrat text-2xl sm:text-2xl lg:text-3xl pt-5 opacity-90">
-          {event.time}
+        <p className="font-montserrat text-xl sm:text-2xl lg:text-3xl pt-5 opacity-90">
+          {formatEventDate(event.date)}
         </p>
 
         <p className="font-montserrat text-lg sm:text-xl lg:text-2xl italic opacity-90">
@@ -101,11 +118,11 @@ export default function CountdownCard({ event }: { event: Event }) {
             { label: "Hours", value: timeLeft.hours },
             { label: "Minutes", value: timeLeft.mins },
           ].map((unit) => (
-            <div key={unit.label} className="flex flex-col items-center justify-center py-4 sm:py-6 lg:py-7">
-              <span className="font-bungee text-2xl sm:text-3xl lg:text-4xl leading-none">
+            <div key={unit.label} className="flex flex-col items-center justify-center gap-2 py-4 sm:py-6 lg:py-7">
+              <span className="font-bungee text-xl sm:text-2xl lg:text-4xl leading-none">
                 {String(unit.value).padStart(2, "0")}
               </span>
-              <span className="font-inria mt-1 sm:mt-2 lg:mt-2 text-xs sm:text-base lg:text-xl opacity-85 tracking-wide">
+              <span className="font-inria text-xs sm:text-base lg:text-xl opacity-85 tracking-wide">
                 {unit.label}
               </span>
             </div>
