@@ -131,9 +131,8 @@ export default function CountdownCard({ event }: { event: Event }) {
       </div>
 
       <a
-        href={event.links[0]?.url ?? "#"}
-        target={event.links[0]?.url ? "_blank" : undefined}
-        rel={event.links[0]?.url ? "noreferrer" : undefined}
+        href={`/events/${event.id}`}
+
         className="font-montserrat pb-1 inline-flex translate-y-3 items-center gap-2 text-base sm:text-lg opacity-90 transition hover:opacity-100"
       >
         <Icon icon="heroicons-outline:external-link" className="h-5 w-5" aria-hidden="true" />
