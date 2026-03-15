@@ -14,6 +14,7 @@ type Event = {
 
 export default function CountdownCarousel({ events }: { events: Event[] }) {
   const [index, setIndex] = useState(0);
+  const [direction, setDirection] = useState<"left" | "right">("right");  // added for different animations for left vs right
   const [isAnimating, setIsAnimating] = useState(false);
   const touchStartX = useRef<number | null>(null);
 
@@ -32,9 +33,16 @@ export default function CountdownCarousel({ events }: { events: Event[] }) {
     }, transitionMs);
   };
 
-  const next = () => changeIndex((index + 1) % events.length);
-  const prev = () =>
+  const next = () => {
+    setDirection("right");
+    changeIndex((index + 1) % events.length);
+  };
+
+  const prev = () => {
+    setDirection("left");
     changeIndex((index - 1 + events.length) % events.length);
+  }
+    
 
   // Touch
   const onTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
@@ -61,18 +69,20 @@ export default function CountdownCarousel({ events }: { events: Event[] }) {
   }
 
   const animationClass = isAnimating
-    ? "opacity-0 -translate-x-4"
+    ? direction === "right" 
+      ? "opacity-0 -translate-x-4"
+      : "opacity-0 translate-x-4"
     : "opacity-100 translate-x-0";
 
   return (
     <section className="w-full py-6">
       <div
-        className="mx-auto flex w-full max-w-6xl flex-col items-center gap-4 px-3 sm:px-4"
+        className="mx-auto flex w-full max-w-5xl flex-col items-center gap-4 px-3 sm:px-4"
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
       >
-        {/* Desktop */}
-        <div className="hidden w-full items-center justify-center gap-3 sm:flex">
+        {/* Desktop (changed breakpoint to md) */}
+        <div className="hidden w-full items-center justify-center gap-3 md:flex"> 
           {/* LEFT TRIANGLE */}
           <button
             onClick={prev}
@@ -98,9 +108,9 @@ export default function CountdownCarousel({ events }: { events: Event[] }) {
           </button>
         </div>
 
-        {/* Mobile */}
+        {/* Mobile  (changed breakpoint to md) */}
         <div
-          className={`w-full transition-all duration-200 ease-out sm:hidden ${animationClass}`}
+          className={`w-full transition-all duration-200 ease-out md:hidden ${animationClass}`}
         >
           <CountdownCard event={events[index]} />
         </div>
