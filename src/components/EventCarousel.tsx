@@ -74,6 +74,9 @@ export default function CountdownCarousel({ events }: { events: Event[] }) {
       : "opacity-0 translate-x-4"
     : "opacity-100 translate-x-0";
 
+    // indicators max 5
+    const indicators = events.length > 5 ? events.slice(0, 5) : events;
+
   return (
     <section className="w-full py-6">
       <div
@@ -117,8 +120,8 @@ export default function CountdownCarousel({ events }: { events: Event[] }) {
 
         {/* Indicators */}
         {hasMultiple && (
-          <div className="mt-1 flex gap-2">
-            {events.map((event, i) => (
+          <div className="mt-1 flex gap-2 overflow-x-hidden">
+            {indicators.map((event, i) => (
               <button
                 key={event.id}
                 onClick={() => changeIndex(i)}

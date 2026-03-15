@@ -1,18 +1,19 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import EventCard from "../components/EventCard.tsx";
+import EventCarousel from "../components/EventCarousel.tsx";
 import events from "../data/events.json";
-
-const nextEvent = events[0];
 ---
 
 <BaseLayout title="Events">
-	<section class="min-h-[70vh] bg-[#0b1020] px-4 py-10 md:px-8 md:py-14">
+	<section
+		class="min-h-[70vh] px-4 py-10 md:px-8 md:py-14"
+		style="background-color: #050505; background-image: radial-gradient(circle, rgba(255, 217, 0, 0.32) 1.2px, transparent 1.2px), radial-gradient(circle, rgba(255, 217, 0, 0.18) 0.8px, transparent 0.8px); background-size: 26px 26px, 14px 14px; background-position: 0 0, 7px 7px;"
+	>
 		<div class="mx-auto flex w-full max-w-6xl flex-col items-center gap-8">
 			<h1 class="text-center text-3xl font-bold text-white">AI@UCF Events Page</h1>
 			{
-				nextEvent ? (
-					<EventCard event={nextEvent} client:load />
+				events.length ? (
+					<EventCarousel events={events} client:load />
 				) : (
 					<p class="text-white/80">No upcoming events yet.</p>
 				)
