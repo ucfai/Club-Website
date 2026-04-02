@@ -1,27 +1,11 @@
 from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel
-from typing import Optional
 from src.database.database import events_collection
-from datetime import datetime
 from bson import ObjectId
+from src.models.event import Events
 
 events_router = APIRouter()
 
 # this is used to create a event_resources class
-class Event_resources(BaseModel):
-    youtube_link: Optional[str] = None
-    colab_link: Optional[str] = None
-
-# used to create a new event class
-class Events(BaseModel):
-    event_name: str             #name of event
-    event_time: datetime        #time of event
-    current_event: bool         #event or no event
-    
-    # optional -------
-    event_description: Optional[str] = None             #event description
-    event_hosts: Optional[list[str]] = None             #hosts of event
-    event_resources: Optional[Event_resources] = None   #resources of event (youtube and/or colab)
 
 # converts from _id -> event_id for less confusion
 def helper(serialize):

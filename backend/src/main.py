@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from src.database.database import db
-from src.api.events import events_router
+from src.services.event import events_router
 
 app = FastAPI()
 
